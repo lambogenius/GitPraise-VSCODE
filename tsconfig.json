@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "target": "ES2022",
+    "module": "Node16",
+    "noEmit": true
+  },
+  "include": ["src/**/*.js"]
+}

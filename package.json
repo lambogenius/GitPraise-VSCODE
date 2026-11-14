@@ -1,0 +1,76 @@
+{
+  "name": "gitpraise",
+  "displayName": "GitPraise",
+  "description": "A better Git blame for VS Code. Praise the coder behind every line.",
+  "version": "0.0.1",
+  "publisher": "lambogenius",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lambogenius/GitPraise-VSCODE.git"
+  },
+  "engines": {
+    "vscode": "^1.110.0"
+  },
+  "categories": ["SCM Providers"],
+  "keywords": ["gitpraise", "git praise", "gitblame", "git blame", "git", "blame", "annotations"],
+  "main": "./src/extension.js",
+  "extensionKind": ["workspace"],
+  "capabilities": {
+    "untrustedWorkspaces": { "supported": false },
+    "virtualWorkspaces": { "supported": false }
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "node --test",
+    "package": "vsce package --no-dependencies --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.15",
+    "@types/vscode": "1.110.0",
+    "@vscode/vsce": "4.1.1",
+    "typescript": "5.9.3"
+  },
+  "contributes": {
+    "commands": [
+      { "command": "gitPraise.toggle", "category": "GitPraise", "title": "Toggle Annotations", "icon": { "light": "images/icon.png", "dark": "images/icon.png" } },
+      { "command": "gitPraise.hide", "category": "GitPraise", "title": "Hide Annotations" },
+      { "command": "gitPraise.show", "category": "GitPraise", "title": "Annotate with GitPraise" },
+      { "command": "gitPraise.refresh", "category": "GitPraise", "title": "Refresh Annotations" },
+      { "command": "gitPraise.showDetails", "category": "GitPraise", "title": "Show Commit Column", "icon": "$(git-commit)" },
+      { "command": "gitPraise.hideDetails", "category": "GitPraise", "title": "Hide Commit Column", "icon": "$(fold)" },
+      { "command": "gitPraise.openDiff", "category": "GitPraise", "title": "Open Line's Commit Diff" },
+      { "command": "gitPraise.copyCommit", "category": "GitPraise", "title": "Copy Line's Commit SHA" }
+    ],
+    "menus": {
+      "editor/title": [
+        { "command": "gitPraise.toggle", "when": "isWorkspaceTrusted && resourceScheme =~ /^(file|vscode-remote)$/ && !isInDiffEditor", "group": "navigation@79" },
+        { "command": "gitPraise.showDetails", "when": "resourcePath in gitPraise.annotated && resourcePath not in gitPraise.expanded && !isInDiffEditor", "group": "navigation@80" },
+        { "command": "gitPraise.hideDetails", "when": "resourcePath in gitPraise.expanded && !isInDiffEditor", "group": "navigation@80" }
+      ],
+      "editor/lineNumber/context": [
+        { "command": "gitPraise.show", "when": "isWorkspaceTrusted && resourceScheme =~ /^(file|vscode-remote)$/ && resourcePath not in gitPraise.annotated", "group": "gitPraise@1" },
+        { "command": "gitPraise.hide", "when": "resourcePath in gitPraise.annotated", "group": "gitPraise@1" },
+        { "command": "gitPraise.openDiff", "when": "resourcePath in gitPraise.annotated", "group": "gitPraise@2" },
+        { "command": "gitPraise.copyCommit", "when": "resourcePath in gitPraise.annotated", "group": "gitPraise@3" }
+      ],
+      "commandPalette": [
+        { "command": "gitPraise.show", "when": "false" },
+        { "command": "gitPraise.hide", "when": "false" },
+        { "command": "gitPraise.toggle", "when": "isWorkspaceTrusted && resourceScheme =~ /^(file|vscode-remote)$/" },
+        { "command": "gitPraise.refresh", "when": "resourcePath in gitPraise.annotated" },
+        { "command": "gitPraise.showDetails", "when": "resourcePath in gitPraise.annotated && resourcePath not in gitPraise.expanded" },
+        { "command": "gitPraise.hideDetails", "when": "resourcePath in gitPraise.expanded" },
+        { "command": "gitPraise.openDiff", "when": "resourcePath in gitPraise.annotated" },
+        { "command": "gitPraise.copyCommit", "when": "resourcePath in gitPraise.annotated" }
+      ]
+    },
+    "configuration": {
+      "title": "GitPraise",
+      "properties": {
+        "gitPraise.ignoreWhitespace": { "type": "boolean", "default": false, "description": "Ignore whitespace-only changes when attributing lines.", "scope": "resource" },
+        "gitPraise.detectMovedLines": { "type": "boolean", "default": false, "description": "Use Git's move detection to follow moved lines within a file.", "scope": "resource" }
+      }
+    }
+  }
+}
