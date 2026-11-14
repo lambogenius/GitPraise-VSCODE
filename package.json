@@ -3,6 +3,7 @@
   "displayName": "GitPraise",
   "description": "A better Git blame for VS Code. Praise the coder behind every line.",
   "version": "0.0.1",
+  "license": "MIT",
   "publisher": "lambogenius",
   "icon": "images/icon.png",
   "repository": {

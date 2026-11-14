@@ -52,3 +52,7 @@ npm run check
 npm test
 npm run package
 ```
+
+## License
+
+Licensed under the [MIT License](LICENSE).
