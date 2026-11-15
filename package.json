@@ -45,7 +45,7 @@
       { "command": "gitPraise.copyCommit", "category": "GitPraise", "title": "Copy Line's Commit SHA" }
     ],
     "submenus": [
-      { "id": "gitPraise.menu", "label": "GitPraise", "icon": "images/toolbar-icon.png" }
+      { "id": "gitPraise.menu", "label": "GitPraise", "icon": { "light": "images/toolbar-icon-light.svg", "dark": "images/toolbar-icon-dark.svg" } }
     ],
     "menus": {
       "editor/title": [

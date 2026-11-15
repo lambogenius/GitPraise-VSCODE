@@ -1,9 +1,22 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const path = require('node:path');
 const { setImmediate: nextTurn } = require('node:timers/promises');
 const test = require('node:test');
 const vm = require('node:vm');
 const gitModule = require('../src/git');
+
+test('toolbar submenu provides existing icon assets for light and dark themes', () => {
+  const repository = fs.realpathSync(path.resolve(__dirname, '..'));
+  const menu = require('../package.json').contributes.submenus.find(item => item.id === 'gitPraise.menu');
+  assert.ok(menu);
+  for (const theme of ['light', 'dark']) {
+    assert.equal(typeof menu.icon?.[theme], 'string', 'The submenu needs an icon path for the ' + theme + ' theme.');
+    const asset = fs.realpathSync(path.resolve(repository, menu.icon[theme]));
+    assert.ok(asset.startsWith(repository + path.sep), 'The icon must resolve inside the repository.');
+    assert.ok(fs.statSync(asset).isFile());
+  }
+});
 
 function fixture(t) {
   const commands = new Map();
