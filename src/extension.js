@@ -228,7 +228,7 @@ function activate(context) {
     return { editor, key, line: typeof menu?.lineNumber === 'number' ? menu.lineNumber - 1 : editor.selection.active.line };
   }
 
-  /** @param {{ uri?: vscode.Uri, lineNumber?: number }} [argument] */
+  /** @param {vscode.Uri | { uri?: vscode.Uri, lineNumber?: number }} [argument] */
   async function show(argument) {
     const target = locate(argument);
     if (!vscode.workspace.isTrusted || !target || annotations.has(target.key)) return;
@@ -306,6 +306,15 @@ function activate(context) {
       return annotations.has(target.key) ? hide(target.key) : show(argument);
     }),
     vscode.commands.registerCommand(namespace + '.show', show),
+    vscode.commands.registerCommand(namespace + '.toggleDetails', async argument => {
+      const target = locate(argument);
+      if (!vscode.workspace.isTrusted || !target) return;
+      const uri = target.editor.document.uri;
+      const loading = annotations.has(target.key) ? undefined : show(uri);
+      const annotation = annotations.get(target.key);
+      if (annotation) await setExpanded(!annotation.expanded, uri);
+      await loading;
+    }),
     vscode.commands.registerCommand(namespace + '.showDetails', argument => setExpanded(true, argument)),
     vscode.commands.registerCommand(namespace + '.hideDetails', argument => setExpanded(false, argument)),
     vscode.commands.registerCommand(namespace + '.hide', async argument => {

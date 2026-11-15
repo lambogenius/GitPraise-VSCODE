@@ -1,8 +1,8 @@
 {
   "name": "gitpraise",
-  "displayName": "GitPraise",
+  "displayName": "Git Praise",
   "description": "A better Git blame for VS Code. Praise the coder behind every line.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "publisher": "lambogenius",
   "icon": "images/icon.png",
@@ -34,20 +34,26 @@
   },
   "contributes": {
     "commands": [
-      { "command": "gitPraise.toggle", "category": "GitPraise", "title": "Toggle Annotations", "icon": { "light": "images/icon.png", "dark": "images/icon.png" } },
+      { "command": "gitPraise.toggle", "title": "GitPraise: Annotation" },
       { "command": "gitPraise.hide", "category": "GitPraise", "title": "Hide Annotations" },
       { "command": "gitPraise.show", "category": "GitPraise", "title": "Annotate with GitPraise" },
       { "command": "gitPraise.refresh", "category": "GitPraise", "title": "Refresh Annotations" },
-      { "command": "gitPraise.showDetails", "category": "GitPraise", "title": "Show Commit Column", "icon": "$(git-commit)" },
+      { "command": "gitPraise.toggleDetails", "title": "GitPraise: Commit Info" },
+      { "command": "gitPraise.showDetails", "title": "GitPraise: Commit Info", "icon": "$(git-commit)" },
       { "command": "gitPraise.hideDetails", "category": "GitPraise", "title": "Hide Commit Column", "icon": "$(fold)" },
       { "command": "gitPraise.openDiff", "category": "GitPraise", "title": "Open Line's Commit Diff" },
       { "command": "gitPraise.copyCommit", "category": "GitPraise", "title": "Copy Line's Commit SHA" }
     ],
+    "submenus": [
+      { "id": "gitPraise.menu", "label": "GitPraise", "icon": "images/toolbar-icon.png" }
+    ],
     "menus": {
       "editor/title": [
-        { "command": "gitPraise.toggle", "when": "isWorkspaceTrusted && resourceScheme =~ /^(file|vscode-remote)$/ && !isInDiffEditor", "group": "navigation@79" },
-        { "command": "gitPraise.showDetails", "when": "resourcePath in gitPraise.annotated && resourcePath not in gitPraise.expanded && !isInDiffEditor", "group": "navigation@80" },
-        { "command": "gitPraise.hideDetails", "when": "resourcePath in gitPraise.expanded && !isInDiffEditor", "group": "navigation@80" }
+        { "submenu": "gitPraise.menu", "when": "isWorkspaceTrusted && resourceScheme =~ /^(file|vscode-remote)$/ && !isInDiffEditor", "group": "navigation@79" }
+      ],
+      "gitPraise.menu": [
+        { "command": "gitPraise.toggle", "group": "gitPraise@1" },
+        { "command": "gitPraise.toggleDetails", "group": "gitPraise@2" }
       ],
       "editor/lineNumber/context": [
         { "command": "gitPraise.show", "when": "isWorkspaceTrusted && resourceScheme =~ /^(file|vscode-remote)$/ && resourcePath not in gitPraise.annotated", "group": "gitPraise@1" },
@@ -60,8 +66,9 @@
         { "command": "gitPraise.hide", "when": "false" },
         { "command": "gitPraise.toggle", "when": "isWorkspaceTrusted && resourceScheme =~ /^(file|vscode-remote)$/" },
         { "command": "gitPraise.refresh", "when": "resourcePath in gitPraise.annotated" },
-        { "command": "gitPraise.showDetails", "when": "resourcePath in gitPraise.annotated && resourcePath not in gitPraise.expanded" },
-        { "command": "gitPraise.hideDetails", "when": "resourcePath in gitPraise.expanded" },
+        { "command": "gitPraise.toggleDetails", "when": "isWorkspaceTrusted && resourceScheme =~ /^(file|vscode-remote)$/" },
+        { "command": "gitPraise.showDetails", "when": "false" },
+        { "command": "gitPraise.hideDetails", "when": "false" },
         { "command": "gitPraise.openDiff", "when": "resourcePath in gitPraise.annotated" },
         { "command": "gitPraise.copyCommit", "when": "resourcePath in gitPraise.annotated" }
       ]

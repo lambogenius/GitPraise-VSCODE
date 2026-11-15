@@ -2,10 +2,10 @@
 
 A better Git blame for VS Code. Praise the coder behind every line.
 
-Show who last changed each line in a Git-tracked file. Click the purple crown in the editor toolbar to turn annotations on or off. You can also right-click a line number and select **Annotate with GitPraise**, or run **GitPraise: Toggle Annotations** from the Command Palette.
+Show who last changed each line in a Git-tracked file. Click the crown in the editor toolbar and choose **GitPraise: Annotation** to turn annotations on or off. You can also right-click a line number and select **Annotate with GitPraise**, or run **GitPraise: Annotation** from the Command Palette.
 
 - Read the author and date beside each line. The same commit uses the same color throughout the file.
-- Click **Show Commit Column** in the editor toolbar to add the short SHA and commit subject beside the author and date. Click **Hide Commit Column** to collapse it. The column starts collapsed for each file.
+- Choose **GitPraise: Commit Info** from the crown menu to toggle the short SHA and commit subject beside the author and date. Choosing it while annotations are off opens both columns. The commit column starts collapsed when you turn annotations on with **GitPraise: Annotation**.
 - Right-click a line number to compare the file with its previous version, copy the full SHA, or hide annotations.
 - Edit a file with annotations open. The column refreshes after a short pause and marks lines Git attributes to your working changes.
 
@@ -13,19 +13,19 @@ Show who last changed each line in a Git-tracked file. Click the purple crown in
 
 ### Basic annotations
 
-The purple crown in the editor toolbar shows the author and date beside each line.
+The author and date appear beside each line.
 
 ![GitPraise editor showing author and date annotations with the purple crown in the toolbar](https://raw.githubusercontent.com/lambogenius/GitPraise-VSCODE/main/images/annotations-basic.png)
 
 ### Expanded commit column
 
-The separate commit button adds the short SHA and commit subject next to the author and date.
+The expanded column shows the short SHA and commit subject next to the author and date.
 
 ![GitPraise editor showing author, date, short SHA, and commit subject with the commit column expanded](https://raw.githubusercontent.com/lambogenius/GitPraise-VSCODE/main/images/annotations-expanded.png)
 
 ## Requirements
 
-Use VS Code 1.110 or later with Git installed and a trusted workspace. The annotation column sits before the code, to the right of the native line numbers. Version 0.1 supports tracked text files with a committed version in HEAD, up to 25,000 lines and 2 MiB of editor text. Historical text previews decode Git blobs as UTF-8.
+Use VS Code 1.110 or later with Git installed and a trusted workspace. The annotation column sits before the code, to the right of the native line numbers. GitPraise supports tracked text files with a committed version in HEAD, up to 25,000 lines and 2 MiB of editor text. Historical text previews decode Git blobs as UTF-8.
 
 ## Settings
 
@@ -36,7 +36,7 @@ Use VS Code 1.110 or later with Git installed and a trusted workspace. The annot
 
 ## Install a local build
 
-In VS Code, run **Extensions: Install from VSIX…** and select `gitpraise-0.0.1.vsix`.
+In VS Code, run **Extensions: Install from VSIX…** and select `gitpraise-0.0.2.vsix`.
 
 If you installed the earlier **Git Blame Column** preview, uninstall it to avoid duplicate commands. If you customized its settings, replace the `gitBlameColumn.` prefix with `gitPraise.` in your settings.
 
