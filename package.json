@@ -2,7 +2,7 @@
   "name": "gitpraise",
   "displayName": "Git Praise",
   "description": "A better Git blame for VS Code. Praise the coder behind every line.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "publisher": "lambogenius",
   "icon": "images/icon.png",

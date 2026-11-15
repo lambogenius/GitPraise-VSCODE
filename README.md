@@ -36,7 +36,7 @@ Use VS Code 1.110 or later with Git installed and a trusted workspace. The annot
 
 ## Install a local build
 
-In VS Code, run **Extensions: Install from VSIX…** and select `gitpraise-0.0.2.vsix`.
+In VS Code, run **Extensions: Install from VSIX…** and select `gitpraise-0.0.3.vsix`.
 
 If you installed the earlier **Git Blame Column** preview, uninstall it to avoid duplicate commands. If you customized its settings, replace the `gitBlameColumn.` prefix with `gitPraise.` in your settings.
 
